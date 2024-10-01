@@ -11,21 +11,25 @@ return {
             vim.o.laststatus = 0
         end
     end,
-    opts = {
-        options = {
-            theme = "auto",
-            globalstatus = true,
-        },
-        sections = {
-            lualine_c = {
-                function()
-                    return require("lsp-progress").progress()
-                end
+    opts = function()
+        return {
+            options = {
+                theme = "auto",
+                globalstatus = true,
             },
-            lualine_x = { require("action-hints").statusline },
-        },
-        extensions = { "neo-tree", "lazy" },
-    },
+            sections = {
+                lualine_c = {
+                    function()
+                        return require("lsp-progress").progress()
+                    end
+                },
+                lualine_x = { require("action-hints").statusline },
+                lualine_y = { require("recorder").displaySlots },
+                lualine_z = { require("recorder").recordingStatus },
+            },
+            extensions = { "neo-tree", "lazy" },
+        }
+    end,
     config = function(spec, opts)
         local lualine = require "lualine"
         lualine.setup(opts)
