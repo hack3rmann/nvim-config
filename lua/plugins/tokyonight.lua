@@ -9,7 +9,7 @@ return {
             floats = "transparent",
         },
     },
-    config = function(spec, opts)
+    config = function(_, opts)
         require("tokyonight").setup(opts)
         vim.cmd.colorscheme "tokyonight"
     end,

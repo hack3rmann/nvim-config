@@ -4,7 +4,7 @@ return {
     opts = {
         autocmd = { enabled = true },
     },
-    config = function(spec, opts)
+    config = function(_, opts)
         require("nvim-lightbulb").setup(opts)
     end,
 }

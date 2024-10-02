@@ -11,7 +11,7 @@ return {
             block = "<leader>b",
         },
     },
-    config = function(spec, opts)
+    config = function(_, opts)
         require("Comment").setup(opts)
     end,
 }

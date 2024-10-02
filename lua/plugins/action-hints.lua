@@ -7,7 +7,7 @@ return {
         },
         use_virtual_text = true,
     },
-    config = function()
+    config = function(_, opts)
         require("action-hints").setup(opts)
     end,
 }

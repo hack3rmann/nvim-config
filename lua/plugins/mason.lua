@@ -5,11 +5,11 @@ return {
             icons = {
                 package_installed = "✓",
                 package_pending = "➜",
-                package_uninstalled = "✗"
-            }
-        }
+                package_uninstalled = "✗",
+            },
+        },
     },
     config = function(_, opts)
-        require("mason").setup()
+        require("mason").setup(opts)
     end,
 }

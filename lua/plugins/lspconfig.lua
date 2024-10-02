@@ -10,12 +10,16 @@ return {
         inlay_hints = { enabled = false },
         capabilites = {},
         autoformat = false,
-        servers = { clangd = {} },
+        servers = {
+            clangd = {},
+            rust_analyzer = {},
+            lua_ls = {},
+        },
     },
     config = function(_, opts)
-        local lspconfig = require("lspconfig")
-        local mason_lspconfig = require("mason-lspconfig")
-        local cmp_nvim_lsp = require("cmp_nvim_lsp")
+        local lspconfig = require "lspconfig"
+        local mason_lspconfig = require "mason-lspconfig"
+        local cmp_nvim_lsp = require "cmp_nvim_lsp"
 
         vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
@@ -38,7 +42,7 @@ return {
             ensure_installed = vim.tbl_keys(opts.servers),
         }
 
-        mason_lspconfig.setup_handlers({
+        mason_lspconfig.setup_handlers {
             function(server_name)
                 lspconfig[server_name].setup {
                     capabilities = capabilities,
@@ -46,18 +50,47 @@ return {
                     settings = opts.servers[server_name],
                 }
             end,
-        })
+        }
 
         lspconfig.clangd.setup {
             cmd = { "/usr/bin/clangd" },
             filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-            root_dir = lspconfig.util.root_pattern(
-                ".clangd",
-                ".clang-tidy",
-                ".clang-format",
-                "compile_commands.json"
-            ),
+            root_dir = lspconfig.util.root_pattern(".clangd", ".clang-tidy", ".clang-format", "compile_commands.json"),
             single_file_support = true,
         }
-    end
+
+        lspconfig.lua_ls.setup {
+            on_init = function(client)
+                if client.workspace_folders then
+                    local path = client.workspace_folders[1].name
+                    if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+                        return
+                    end
+                end
+
+                client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+                    runtime = {
+                        -- Tell the language server which version of Lua you're using
+                        -- (most likely LuaJIT in the case of Neovim)
+                        version = "LuaJIT",
+                    },
+                    -- Make the server aware of Neovim runtime files
+                    workspace = {
+                        checkThirdParty = false,
+                        library = {
+                            vim.env.VIMRUNTIME,
+                            -- Depending on the usage, you might want to add additional paths here.
+                            -- "${3rd}/luv/library"
+                            -- "${3rd}/busted/library",
+                        },
+                        -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                        -- library = vim.api.nvim_get_runtime_file("", true)
+                    },
+                })
+            end,
+            settings = {
+                Lua = {},
+            },
+        }
+    end,
 }
