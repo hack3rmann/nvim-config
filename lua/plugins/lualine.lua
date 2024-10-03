@@ -23,7 +23,6 @@ return {
                         return require("lsp-progress").progress()
                     end,
                 },
-                lualine_x = { require("action-hints").statusline },
                 lualine_y = { require("recorder").displaySlots },
                 lualine_z = { require("recorder").recordingStatus },
             },
