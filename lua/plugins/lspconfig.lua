@@ -24,7 +24,7 @@ return {
         vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
         local lsp_attach = function(client, bufnr)
-            K.LspKeymaps(client, bufnr)
+            -- K.LspKeymaps(client, bufnr)
             vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
                 vim.lsp.buf.format()
             end, { desc = "Format current buffer with LSP" })
@@ -34,7 +34,7 @@ return {
             "force",
             {},
             vim.lsp.protocol.make_client_capabilities(),
-            has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+            cmp_nvim_lsp.default_capabilities() or {},
             opts.capabilities or {}
         )
 
