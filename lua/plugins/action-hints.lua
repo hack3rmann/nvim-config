@@ -2,8 +2,8 @@ return {
     "roobert/action-hints.nvim",
     opts = {
         template = {
-            definition = { text = " ⊛", color = "#add8e6" },
-            references = { text = " ↱%s", color = "#ff6666" },
+            definition = { text = " 󱞫D", color = "#565254" },
+            references = { text = " 󱞫R", color = "#565254" },
         },
         use_virtual_text = true,
     },
