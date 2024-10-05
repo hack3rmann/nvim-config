@@ -17,9 +17,9 @@ return {
         },
     },
     config = function(_, opts)
-        local lspconfig = require "lspconfig"
-        local mason_lspconfig = require "mason-lspconfig"
-        local cmp_nvim_lsp = require "cmp_nvim_lsp"
+        local lspconfig = require("lspconfig")
+        local mason_lspconfig = require("mason-lspconfig")
+        local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
         vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
@@ -38,28 +38,41 @@ return {
             opts.capabilities or {}
         )
 
-        mason_lspconfig.setup {
+        mason_lspconfig.setup({
             ensure_installed = vim.tbl_keys(opts.servers),
-        }
+        })
 
-        mason_lspconfig.setup_handlers {
+        mason_lspconfig.setup_handlers({
             function(server_name)
-                lspconfig[server_name].setup {
+                lspconfig[server_name].setup({
                     capabilities = capabilities,
                     on_attach = lsp_attach,
                     settings = opts.servers[server_name],
-                }
+                })
             end,
-        }
+        })
 
-        lspconfig.clangd.setup {
+        lspconfig.rust_analyzer.setup({
+            settings = {
+                ["rust-analyzer"] = {
+                    checkOnSave = true,
+                    check = {
+                        enable = true,
+                        command = "clippy",
+                        features = "all",
+                    },
+                },
+            },
+        })
+
+        lspconfig.clangd.setup({
             cmd = { "/usr/bin/clangd" },
             filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
             root_dir = lspconfig.util.root_pattern(".clangd", ".clang-tidy", ".clang-format", "compile_commands.json"),
             single_file_support = true,
-        }
+        })
 
-        lspconfig.lua_ls.setup {
+        lspconfig.lua_ls.setup({
             on_init = function(client)
                 if client.workspace_folders then
                     local path = client.workspace_folders[1].name
@@ -91,6 +104,6 @@ return {
             settings = {
                 Lua = {},
             },
-        }
+        })
     end,
 }
