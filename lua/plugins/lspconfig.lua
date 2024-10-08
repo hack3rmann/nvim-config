@@ -23,7 +23,7 @@ return {
 
         vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-        local lsp_attach = function(client, bufnr)
+        local lsp_attach = function(_, bufnr)
             -- K.LspKeymaps(client, bufnr)
             vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
                 vim.lsp.buf.format()

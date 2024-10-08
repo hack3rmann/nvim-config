@@ -3,9 +3,12 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         opts = {
-            ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+            ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "nix", "query", "markdown", "markdown_inline" },
             highlight = { enable = true },
-            indent = { enable = true },
+            indent = {
+                enable = true,
+                disable = { "nix" },
+            },
             textobjects = {
                 select = {
                     enable = true,
@@ -49,7 +52,7 @@ return {
                 },
             },
         },
-        config = function(spec, opts)
+        config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
         end,
     },

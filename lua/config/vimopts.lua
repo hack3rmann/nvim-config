@@ -3,7 +3,7 @@ vim.wo.number = true
 
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.tabstop = 8
+vim.opt.tabstop = 2
 vim.opt.softtabstop = 0
 vim.opt.smartindent = false
 vim.opt.cursorline = true
