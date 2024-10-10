@@ -42,6 +42,6 @@ return {
     config = function()
         local actions_preview = require("actions-preview")
 
-        vim.keymap.set({ "v", "n" }, "<leader>a", actions_preview.code_actions)
+        vim.keymap.set({ "v", "n" }, "<leader>a", actions_preview.code_actions, { desc = "Code actions" })
     end,
 }
