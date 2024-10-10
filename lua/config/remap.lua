@@ -2,7 +2,6 @@
 vim.keymap.set("n", "<leader>fs", vim.cmd.Ex, { desc = "Open default filesystem" })
 
 -- LSP code actions
-vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { desc = "Open code actions" })
 vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set("n", "<leader>gr", function(context, opts)
     local has_telescope, telescope = pcall(require, "telescope.builtin")
