@@ -61,6 +61,7 @@ return {
                         command = "clippy",
                         features = "all",
                     },
+                    rustc = { source = "discover" },
                 },
             },
         })
