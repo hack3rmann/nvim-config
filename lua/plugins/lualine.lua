@@ -30,7 +30,7 @@ return {
         }
     end,
     config = function(spec, opts)
-        local lualine = require "lualine"
+        local lualine = require("lualine")
         lualine.setup(opts)
 
         -- listen lsp-progress event and refresh lualine

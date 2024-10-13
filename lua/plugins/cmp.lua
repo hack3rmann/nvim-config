@@ -10,15 +10,15 @@ return {
         "L3MON4D3/LuaSnip",
     },
     config = function()
-        local cmp = require "cmp"
-        local luasnip = require "luasnip"
+        local cmp = require("cmp")
+        local luasnip = require("luasnip")
         vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
         if vim.o.ft == "clap_input" and vim.o.ft == "guihua" and vim.o.ft == "guihua_rust" then
-            cmp.setup.buffer { completion = { enable = false } }
+            cmp.setup.buffer({ completion = { enable = false } })
         end
 
-        cmp.setup {
+        cmp.setup({
             snippet = {
                 expand = function(args)
                     require("luasnip").lsp_expand(args.body)
@@ -29,14 +29,14 @@ return {
                 documentation = cmp.config.window.bordered(),
             },
             mapping = {
-                ["<C-Space>"] = cmp.mapping.complete {},
+                ["<C-Space>"] = cmp.mapping.complete({}),
                 ["<C-e>"] = cmp.mapping.close(),
                 ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-d>"] = cmp.mapping.scroll_docs(4),
-                ["<CR>"] = cmp.mapping.confirm {
+                ["<CR>"] = cmp.mapping.confirm({
                     behavior = cmp.ConfirmBehavior.Replace,
                     select = false,
-                },
+                }),
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -65,7 +65,7 @@ return {
                 { name = "buffer" },
                 { name = "path" },
             }),
-        }
+        })
 
         cmp.setup.cmdline(":", {
             mapping = cmp.mapping.preset.cmdline(),

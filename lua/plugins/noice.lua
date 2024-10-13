@@ -3,10 +3,20 @@ return {
     dependencies = {
         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
+        -- "rcarriga/nvim-notify",
     },
     event = "VeryLazy",
     opts = {
+        routes = {
+            {
+                filter = {
+                    event = "msg_show",
+                    kind = "",
+                    find = "written",
+                },
+                opts = { skip = true },
+            },
+        },
         lsp = {
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
             override = {
