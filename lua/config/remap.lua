@@ -15,3 +15,6 @@ end, { desc = "Go to references" })
 
 -- Disable search highlight
 vim.keymap.set("n", "<leader>/", ":noh<CR>", { silent = true, desc = "Clear search highlight" })
+
+-- Open float diagnostics
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diagnostics" })
