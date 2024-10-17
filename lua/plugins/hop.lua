@@ -10,8 +10,8 @@ return {
 
         local Direcion = require("hop.hint").HintDirection
 
-        vim.keymap.set("", "<leader><leader>/", function()
+        vim.keymap.set("", "<leader>h", function()
             hop.hint_patterns({ direction = Direcion.ALL, current_line_only = false })
-        end, { remap = true, desc = "Easymotion jump" })
+        end, { remap = true, desc = "Hop jump" })
     end,
 }
