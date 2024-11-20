@@ -10,4 +10,6 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.cmd([[hi CursorLineNr guifg=#af00af]])
 
+vim.opt.scrolloff = 10
+
 vim.g.mapleader = " "
