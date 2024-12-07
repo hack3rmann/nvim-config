@@ -19,10 +19,13 @@ return {
                 end
             end,
             sources = {
+                null_ls.builtins.formatting.prettier,
+                null_ls.builtins.formatting.prettierd,
                 null_ls.builtins.formatting.clang_format,
                 null_ls.builtins.formatting.stylua,
                 null_ls.builtins.formatting.nixfmt,
                 null_ls.builtins.formatting.yamlfmt,
+                null_ls.builtins.formatting.cmakelang,
             },
         })
 
