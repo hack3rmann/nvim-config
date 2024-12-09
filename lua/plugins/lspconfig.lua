@@ -66,6 +66,14 @@ return {
             },
         })
 
+        lspconfig.tinymist.setup({
+            cmd = { "tinymist" },
+            filetypes = { "typst" },
+            single_file_support = true,
+            root_dir = lspconfig.util.root_pattern(".typ"),
+            offset_encoding = "utf-8",
+        })
+
         lspconfig.clangd.setup({
             cmd = { "/usr/bin/clangd" },
             filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },

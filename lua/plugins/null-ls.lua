@@ -26,7 +26,6 @@ return {
                 null_ls.builtins.formatting.stylua,
                 null_ls.builtins.formatting.nixfmt,
                 null_ls.builtins.formatting.yamlfmt,
-                null_ls.builtins.formatting.cmakelang,
             },
         })
 
