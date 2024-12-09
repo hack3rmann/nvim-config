@@ -22,3 +22,8 @@ vim.filetype.add({
         [".*/hypr/.*%.conf"] = "hyprlang",
     },
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "typst",
+    command = "setlocal shiftwidth=2 breakindent linebreak",
+})

@@ -20,6 +20,7 @@ return {
             end,
             sources = {
                 null_ls.builtins.formatting.prettier,
+                null_ls.builtins.formatting.typstfmt,
                 null_ls.builtins.formatting.prettierd,
                 null_ls.builtins.formatting.clang_format,
                 null_ls.builtins.formatting.stylua,
