@@ -28,6 +28,7 @@ return {
         vim.keymap.set("n", "<leader>ds", dap.step_over, { desc = "Step over" })
         vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step into" })
         vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Step out" })
+        vim.keymap.set({ "n", "v" }, "<leader>de", dapui.eval, { desc = "Evaluate expression" })
 
         dap.adapters.codelldb = {
             type = "server",
