@@ -642,6 +642,7 @@ return {
                 source = "filesystem",
                 position = "left",
                 reveal_force_cwd = true,
+                toggle = true,
             })
         end, { desc = "Reveal filesystem" })
     end,
