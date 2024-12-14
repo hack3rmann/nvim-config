@@ -15,15 +15,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local user = os.getenv("USER")
-
--- default value for `concurrency` in lazy.nvim
-local concurrency = jit.os:find("Windows") and (vim.uv.available_parallelism() * 2) or nil
-
--- make less agressive concurrency while on practicum server
-if user and string.match(user, "s022[0-9][0-9][0-9][0-9][0-9]") then
-    concurrency = 8
-end
+local util = require("config.util")
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -36,5 +28,5 @@ require("lazy").setup({
     install = { colorscheme = { "tokyonight" } },
     -- automatically check for plugin updates
     checker = { enabled = true },
-    concurrency = concurrency,
+    concurrency = util.available_concurrency(),
 })
