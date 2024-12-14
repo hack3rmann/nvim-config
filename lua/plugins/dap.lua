@@ -20,8 +20,8 @@ return {
 
         dap.listeners.before.attach.dapui_config = open_debug
         dap.listeners.before.launch.dapui_config = open_debug
-        -- dap.listeners.before.event_terminated.dapui_config = dapui.close
-        -- dap.listeners.before.event_exited.dapui_config = dapui.close
+        dap.listeners.before.event_terminated.dapui_config = dapui.close
+        dap.listeners.before.event_exited.dapui_config = dapui.close
 
         vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
         vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue debugging" })
