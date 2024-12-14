@@ -9,6 +9,7 @@ Custom *NeoVim* configuration that makes NeoVim the best IDE.
 - *Lazy* package manager
 - Notification system
 - LSP completions, actions and refactoring
+- Debugging with *DAP*s
 
 You can see all plugins listed in [plugins](/lua/plugins) directory.
 
@@ -16,7 +17,7 @@ You can see all plugins listed in [plugins](/lua/plugins) directory.
 
 You can find
 
-- auto-switches in [switches.lua](/lua/config/switches.lua) file
+- switches in [switches.lua](/lua/config/switches.lua) file
 - vim options in [vimopts.lua](/lua/config/vimopts.lua) file
 - some key mappings in [remap.lua](/lua/config/remap.lua) file
 - plugins configuration in [plugins](/lua/plugins) directory
@@ -35,7 +36,7 @@ mv ~/.local/state/nvim ~/.local/state/nvim.bak
 mv ~/.cache/nvim ~/.cache/nvim.bak
 ```
 
-### 2. Clone repo
+### 2. Clone the repo
 
 ```shell
 git clone https://github.com/hack3rmann/nvim-config.git ~/.config/nvim
