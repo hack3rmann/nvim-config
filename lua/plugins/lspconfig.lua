@@ -5,6 +5,7 @@ return {
         "mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
+        "nvim-java",
     },
     opts = {
         inlay_hints = { enabled = false },
@@ -20,6 +21,7 @@ return {
         local lspconfig = require("lspconfig")
         local mason_lspconfig = require("mason-lspconfig")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
+        require("java").setup()
 
         vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
@@ -114,5 +116,7 @@ return {
                 Lua = {},
             },
         })
+
+        lspconfig.jdtls.setup({})
     end,
 }
