@@ -13,7 +13,6 @@ return {
         autoformat = false,
         servers = {
             clangd = {},
-            rust_analyzer = {},
             lua_ls = {},
         },
     },
@@ -66,6 +65,7 @@ return {
                     rustc = { source = "discover" },
                 },
             },
+            cmd = "rust-analyzer",
         })
 
         lspconfig.tinymist.setup({
