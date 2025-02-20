@@ -8,6 +8,18 @@ return {
                 vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
                 vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr, remap = true })
             end,
+            settings = {
+                ["rust-analyzer"] = {
+                    diagnostics = { enable = true },
+                    checkOnSave = true,
+                    check = {
+                        enable = true,
+                        command = "clippy",
+                        features = "all",
+                    },
+                    rustc = { source = "discover" },
+                },
+            },
         },
         debug = {
             adapter = {

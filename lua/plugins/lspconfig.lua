@@ -14,6 +14,17 @@ return {
         servers = {
             clangd = {},
             lua_ls = {},
+            rust_analyzer = {},
+        },
+        diagnostics = {
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = "󰅚",
+                    [vim.diagnostic.severity.WARN] = "󰀪",
+                    [vim.diagnostic.severity.HINT] = "󰌶",
+                    [vim.diagnostic.severity.INFO] = "",
+                },
+            },
         },
     },
     config = function(_, opts)
@@ -51,21 +62,6 @@ return {
                     settings = opts.servers[server_name],
                 })
             end,
-        })
-
-        lspconfig.rust_analyzer.setup({
-            settings = {
-                ["rust-analyzer"] = {
-                    checkOnSave = true,
-                    check = {
-                        enable = true,
-                        command = "clippy",
-                        features = "all",
-                    },
-                    rustc = { source = "discover" },
-                },
-            },
-            cmd = "rust-analyzer",
         })
 
         lspconfig.tinymist.setup({
