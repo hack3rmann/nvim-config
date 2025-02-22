@@ -20,6 +20,7 @@ return {
                     rustc = { source = "discover" },
                 },
             },
+            cmd = { "rust-analyzer" },
         },
         debug = {
             adapter = {

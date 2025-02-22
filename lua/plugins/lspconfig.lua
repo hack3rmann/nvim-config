@@ -14,7 +14,7 @@ return {
         servers = {
             clangd = {},
             lua_ls = {},
-            rust_analyzer = {},
+            -- rust_analyzer = {},
         },
         diagnostics = {
             signs = {
