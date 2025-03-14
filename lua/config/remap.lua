@@ -12,6 +12,7 @@ vim.keymap.set("n", "<leader>gr", function(context, opts)
         vim.lsp.buf.references(context, opts)
     end
 end, { desc = "Go to references" })
+vim.keymap.set("n", "<leader>gb", "<C-t>", { desc = "Go back" });
 
 -- Disable search highlight
 vim.keymap.set("n", "<leader>/", ":noh<CR>", { silent = true, desc = "Clear search highlight" })
