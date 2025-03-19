@@ -4,7 +4,6 @@ return {
     dependencies = {
         "mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp",
         "nvim-java",
     },
     opts = {
@@ -14,7 +13,6 @@ return {
         servers = {
             clangd = {},
             lua_ls = {},
-            -- rust_analyzer = {},
         },
         diagnostics = {
             signs = {
@@ -30,7 +28,8 @@ return {
     config = function(_, opts)
         local lspconfig = require("lspconfig")
         local mason_lspconfig = require("mason-lspconfig")
-        local cmp_nvim_lsp = require("cmp_nvim_lsp")
+        local blink_cmp = require("blink.cmp");
+
         require("java").setup()
 
         vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -42,13 +41,7 @@ return {
             end, { desc = "Format current buffer with LSP" })
         end
 
-        local capabilities = vim.tbl_deep_extend(
-            "force",
-            {},
-            vim.lsp.protocol.make_client_capabilities(),
-            cmp_nvim_lsp.default_capabilities() or {},
-            opts.capabilities or {}
-        )
+        local capabilities = blink_cmp.get_lsp_capabilities(opts.capabilities or {})
 
         mason_lspconfig.setup({
             ensure_installed = vim.tbl_keys(opts.servers),
