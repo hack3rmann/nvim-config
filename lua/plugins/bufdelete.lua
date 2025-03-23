@@ -3,7 +3,7 @@ return {
     event = "VeryLazy",
     keys = {
         {
-            "<leader>tq",
+            "<leader>q",
             function()
                 require("bufdelete").bufdelete(0, true)
             end,
