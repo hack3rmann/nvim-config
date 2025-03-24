@@ -42,6 +42,19 @@ return {
         vim.keymap.set("n", "<leader>h", ":BufferLineCyclePrev<CR>", { desc = "Next tab", silent = true })
         vim.keymap.set("n", "<leader>tN", ":BufferLineMoveNext<CR>", { desc = "Next tab", silent = true })
         vim.keymap.set("n", "<leader>tP", ":BufferLineMovePrev<CR>", { desc = "Next tab", silent = true })
+        vim.keymap.set(
+            "n",
+            "<leader>Qh",
+            ":BufferLineCloseLeft<CR>",
+            { desc = "Close tabs to the left", silent = true }
+        )
+        vim.keymap.set(
+            "n",
+            "<leader>Ql",
+            ":BufferLineCloseRight<CR>",
+            { desc = "Close tabs to the right", silent = true }
+        )
+        vim.keymap.set("n", "<leader>QQ", ":BufferLineCloseOthers<CR>", { desc = "Close other tabs", silent = true })
 
         for i = 1, 9 do
             vim.keymap.set("n", string.format("<leader>%d", i), function()

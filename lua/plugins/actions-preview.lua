@@ -1,5 +1,16 @@
 return {
     "aznhe21/actions-preview.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    keys = {
+        {
+            mode = { "v", "n" },
+            "<leader>a",
+            function()
+                require("actions-preview").code_actions()
+            end,
+            desc = "Code actions",
+        },
+    },
     opts = function()
         local telescope_themes = require("telescope.themes")
 
@@ -39,9 +50,7 @@ return {
             ),
         }
     end,
-    config = function()
-        local actions_preview = require("actions-preview")
-
-        vim.keymap.set({ "v", "n" }, "<leader>a", actions_preview.code_actions, { desc = "Code actions" })
+    config = function(_, opts)
+        require("actions-preview").setup(opts)
     end,
 }

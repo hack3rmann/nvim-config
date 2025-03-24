@@ -1,5 +1,66 @@
 return {
     "mfussenegger/nvim-dap",
+    dependencies = { "theHamsta/nvim-dap-virtual-text" },
+    keys = {
+        {
+            "<leader>db",
+            function()
+                require("dap").toggle_breakpoint()
+            end,
+            desc = "Toggle breakpoint",
+        },
+        {
+            "<leader>dc",
+            function()
+                require("dap").continue()
+            end,
+            desc = "Continue debugging",
+        },
+        {
+            "<leader>du",
+            function()
+                require("dapui").close()
+            end,
+            desc = "Toggle debug UI",
+        },
+        {
+            "<leader>ds",
+            function()
+                require("dap").step_over()
+            end,
+            desc = "Step over",
+        },
+        {
+            "<leader>di",
+            function()
+                require("dap").step_into()
+            end,
+            desc = "Step into",
+        },
+        {
+            "<leader>do",
+            function()
+                require("dap").step_out()
+            end,
+            desc = "Step out",
+        },
+        {
+            "<leader>dq",
+            function()
+                require("dap").terminate()
+                require("dapui").close()
+            end,
+            desc = "Terminate debugger",
+        },
+        {
+            modes = { "n", "v" },
+            "<leader>de",
+            function()
+                require("dap").eval()
+            end,
+            desc = "Evaluate expression",
+        },
+    },
     config = function()
         local dap = require("dap")
         local dapui = require("dapui")
@@ -22,18 +83,6 @@ return {
         dap.listeners.before.launch.dapui_config = open_debug
         dap.listeners.before.event_terminated.dapui_config = dapui.close
         dap.listeners.before.event_exited.dapui_config = dapui.close
-
-        vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
-        vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue debugging" })
-        vim.keymap.set("n", "<leader>dq", function()
-            dap.terminate()
-            dapui.close()
-        end, { desc = "Terminate debugger" })
-        vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Toggle debug UI" })
-        vim.keymap.set("n", "<leader>ds", dap.step_over, { desc = "Step over" })
-        vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step into" })
-        vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Step out" })
-        vim.keymap.set({ "n", "v" }, "<leader>de", dapui.eval, { desc = "Evaluate expression" })
 
         dap.adapters.codelldb = {
             type = "server",

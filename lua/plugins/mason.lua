@@ -1,5 +1,13 @@
 return {
     "williamboman/mason.nvim",
+    cmd = {
+        "Mason",
+        "MasonInstall",
+        "MasonUninstall",
+        "MasonUninstallAll",
+        "MasonUpdate",
+        "MasonLog",
+    },
     opts = {
         ui = {
             icons = {
@@ -7,6 +15,7 @@ return {
                 package_pending = "➜",
                 package_uninstalled = "✗",
             },
+            border = "rounded",
         },
     },
     config = function(_, opts)

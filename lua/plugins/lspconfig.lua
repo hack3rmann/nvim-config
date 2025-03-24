@@ -1,10 +1,48 @@
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
+    keys = {
+        {
+            "<leader>gd",
+            function()
+                local has_telescope, telescope = pcall(require, "telescope.builtin")
+
+                if has_telescope then
+                    telescope.lsp_definitions()
+                else
+                    vim.lsp.buf.definition()
+                end
+            end,
+            desc = "Go to definition",
+        },
+        {
+            "<leader>gr",
+            function(context, opts)
+                local has_telescope, telescope = pcall(require, "telescope.builtin")
+
+                if has_telescope then
+                    telescope.lsp_references()
+                else
+                    vim.lsp.buf.references(context, opts)
+                end
+            end,
+            desc = "Go to references",
+        },
+        {
+            "<leader>gb",
+            "<C-t>",
+            desc = "Go back",
+        },
+        {
+            "<leader>d",
+            vim.diagnostic.open_float,
+            desc = "Open diagnostics",
+        },
+    },
     dependencies = {
         "mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "nvim-java",
+        "linrongbin16/lsp-progress.nvim",
     },
     opts = {
         inlay_hints = { enabled = false },
@@ -28,9 +66,7 @@ return {
     config = function(_, opts)
         local lspconfig = require("lspconfig")
         local mason_lspconfig = require("mason-lspconfig")
-        local blink_cmp = require("blink.cmp");
-
-        require("java").setup()
+        local blink_cmp = require("blink.cmp")
 
         vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 

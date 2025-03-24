@@ -1,7 +1,8 @@
 return {
     "saghen/blink.cmp",
-    -- optional: provides snippets for the snippet source
-    dependencies = { "rafamadriz/friendly-snippets" },
+    event = "BufRead",
+    build = "cargo build --release",
+    version = "*",
     opts = {
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
         -- 'super-tab' for mappings similar to vscode (tab to accept)
@@ -39,14 +40,23 @@ return {
         -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
         --
         -- See the fuzzy documentation for more information
-        fuzzy = { implementation = "prefer_rust" },
+        fuzzy = {
+            implementation = "prefer_rust",
+            prebuilt_binaries = {
+                download = false,
+            },
+        },
 
         completion = {
             ghost_text = { enabled = true },
             menu = { border = "rounded" },
             documentation = { window = { border = "rounded" } },
         },
+
         signature = { window = { border = "single" } },
     },
     opts_extend = { "sources.default" },
+    config = function(_, opts)
+        require("blink.cmp").setup(opts)
+    end,
 }

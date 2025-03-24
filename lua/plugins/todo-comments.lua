@@ -1,9 +1,10 @@
 return {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    event = "BufRead",
     opts = {
         highlight = {
-            pattern = [[.*(<(KEYWORDS).*):]],
+            pattern = [[.*(<(KEYWORDS)[^:]*):]],
         },
     },
     config = function(_, opts)

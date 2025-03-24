@@ -1,5 +1,14 @@
 return {
     "isakbm/gitgraph.nvim",
+    keys = {
+        {
+            "<leader>gg",
+            function()
+                require("gitgraph").draw({}, { all = true, max_count = 5000 })
+            end,
+            desc = "GitGraph - Draw",
+        },
+    },
     opts = {
         symbols = {
             merge_commit = "",
@@ -42,13 +51,7 @@ return {
             end,
         },
     },
-    keys = {
-        {
-            "<leader>gg",
-            function()
-                require("gitgraph").draw({}, { all = true, max_count = 5000 })
-            end,
-            desc = "GitGraph - Draw",
-        },
-    },
+    config = function(_, opts)
+        require("gitgragh").setup(opts)
+    end,
 }

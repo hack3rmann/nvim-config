@@ -1,17 +1,22 @@
 return {
     "smoka7/hop.nvim",
     version = "*",
+    keys = {
+        {
+            "<leader><leader>",
+            function()
+                local hop = require("hop")
+                local Direction = require("hop.hint").HintDirection;
+                hop.hint_patterns({ direction = Direction.ALL, current_line_only = false })
+            end,
+            remap = true,
+            desc = "Hop jump",
+        },
+    },
     opts = {
         keys = "etovxqpdygfblzhckisuran",
     },
     config = function(_, opts)
-        local hop = require("hop")
-        hop.setup(opts)
-
-        local Direcion = require("hop.hint").HintDirection
-
-        vim.keymap.set("", "<leader>v", function()
-            hop.hint_patterns({ direction = Direcion.ALL, current_line_only = false })
-        end, { remap = true, desc = "Hop jump" })
+        require("hop").setup(opts)
     end,
 }

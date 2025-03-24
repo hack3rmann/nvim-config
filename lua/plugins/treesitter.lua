@@ -3,7 +3,18 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         opts = {
-            ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "nix", "query", "markdown", "markdown_inline" },
+            ensure_installed = {
+                "c",
+                "cpp",
+                "rust",
+                "lua",
+                "vim",
+                "vimdoc",
+                "nix",
+                "query",
+                "markdown",
+                "markdown_inline",
+            },
             highlight = { enable = true },
             indent = {
                 enable = true,

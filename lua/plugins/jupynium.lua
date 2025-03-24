@@ -1,6 +1,14 @@
 return {
     "kiyoon/jupynium.nvim",
     build = "pip3 install --user .",
+    cmd = {
+        "JupyniumAttachToServer",
+        "JupyniumShortsightedDisable",
+        "JupyniumShortsightedEnable",
+        "JupyniumShortsightedToggle",
+        "JupyniumStartAndAttachToServer",
+        "JupyniumStartAndAttachToServerInTerminal",
+    },
     dependencies = {
         "rcarriga/nvim-notify",
         "stevearc/dressing.nvim",

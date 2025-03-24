@@ -1,5 +1,6 @@
 return {
     "wurli/visimatch.nvim",
+    event = "BufRead",
     opts = {
         chars_lower_limit = 2,
     },

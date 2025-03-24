@@ -1,6 +1,5 @@
 return {
     "famiu/bufdelete.nvim",
-    event = "VeryLazy",
     keys = {
         {
             "<leader>q",
