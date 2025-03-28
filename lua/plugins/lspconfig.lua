@@ -68,6 +68,8 @@ return {
         local mason_lspconfig = require("mason-lspconfig")
         local blink_cmp = require("blink.cmp")
 
+        require("rust-tools")
+
         vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
         local lsp_attach = function(_, bufnr)
@@ -91,6 +93,16 @@ return {
                     settings = opts.servers[server_name],
                 })
             end,
+        })
+
+        lspconfig.slangd.setup({
+            cmd = { "slangd" },
+            filetypes = {
+                "hlsl",
+                "slang",
+                "shaderslang",
+            },
+            single_file_support = true,
         })
 
         lspconfig.tinymist.setup({
