@@ -20,6 +20,7 @@ vim.filetype.add({
         [".*/mako/config"] = "dosini",
         [".*/kitty/*.conf"] = "bash",
         [".*/hypr/.*%.conf"] = "hyprlang",
+        [".*.slang"] = "slang",
     },
 })
 
