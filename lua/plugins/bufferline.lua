@@ -34,8 +34,10 @@ return {
         vim.opt.mousemoveevent = true
 
         local bufferline = require("bufferline")
-
         bufferline.setup(opts)
+
+        -- Make background transparent
+        vim.api.nvim_set_hl(0, "TabLineFill", { bg = "black" })
 
         vim.keymap.set("n", "<leader>tt", ":BufferLinePick<CR>", { desc = "Pick a tab", silent = true })
         vim.keymap.set("n", "<leader>l", ":BufferLineCycleNext<CR>", { desc = "Next tab", silent = true })
