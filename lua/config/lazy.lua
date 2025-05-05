@@ -15,8 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local util = require("config.util")
-
 -- Setup lazy.nvim
 require("lazy").setup({
     spec = {
@@ -28,7 +26,6 @@ require("lazy").setup({
     install = { colorscheme = { "tokyonight" } },
     -- automatically check for plugin updates
     checker = { enabled = true },
-    concurrency = util.available_concurrency(),
     ui = { border = "rounded" },
     change_detection = { notify = false },
 })

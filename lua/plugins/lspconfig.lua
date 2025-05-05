@@ -73,7 +73,6 @@ return {
         vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
         local lsp_attach = function(_, bufnr)
-            -- K.LspKeymaps(client, bufnr)
             vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
                 vim.lsp.buf.format()
             end, { desc = "Format current buffer with LSP" })
@@ -141,7 +140,7 @@ return {
                         library = {
                             vim.env.VIMRUNTIME,
                             -- Depending on the usage, you might want to add additional paths here.
-                            -- "${3rd}/luv/library"
+                            "${3rd}/luv/library",
                             -- "${3rd}/busted/library",
                         },
                         -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
