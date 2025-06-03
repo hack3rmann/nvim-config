@@ -2,7 +2,6 @@ return {
     "mrcjkb/rustaceanvim",
     version = "^6",
     ft = "rust",
-    dependencies = { "nvim-telescope/telescope.nvim" },
     opts = {
         -- Plugin configuration
         tools = {
