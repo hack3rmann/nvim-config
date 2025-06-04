@@ -51,7 +51,6 @@ return {
         servers = {
             clangd = {},
             lua_ls = {},
-            rust_analyzer = {},
             tinymist = {},
         },
         diagnostics = {
