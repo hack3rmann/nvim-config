@@ -31,6 +31,10 @@ return {
                         features = "all",
                     },
                     rustc = { source = "discover" },
+                    runBuildScripts = false,
+                    cargo = {
+                        runBuildScripts = false,
+                    },
                 },
             },
         },
