@@ -130,5 +130,11 @@ return {
         vim.lsp.config("jdtls", {})
 
         vim.lsp.config("ts_ls", {})
+
+        vim.lsp.config("wgsl_analyzer", {
+            cmd = { "wgsl_analyzer" },
+            filetypes = { "wgsl" },
+            single_file_support = true,
+        })
     end,
 }
