@@ -136,5 +136,7 @@ return {
             filetypes = { "wgsl" },
             single_file_support = true,
         })
+
+        vim.lsp.config("sqls", {})
     end,
 }
