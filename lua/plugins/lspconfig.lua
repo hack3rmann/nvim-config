@@ -131,12 +131,14 @@ return {
 
         vim.lsp.config("ts_ls", {})
 
-        vim.lsp.config("wgsl_analyzer", {
-            cmd = { "wgsl_analyzer" },
+        vim.lsp.config("wgsl-analyzer", {
+            cmd = { "wgsl-analyzer" },
             filetypes = { "wgsl" },
             single_file_support = true,
         })
 
         vim.lsp.config("sqls", {})
+
+        vim.lsp.config("gopls", {})
     end,
 }
