@@ -127,18 +127,21 @@ return {
             },
         })
 
-        vim.lsp.config("jdtls", {})
-
-        vim.lsp.config("ts_ls", {})
-
         vim.lsp.config("wgsl-analyzer", {
             cmd = { "wgsl-analyzer" },
             filetypes = { "wgsl" },
             single_file_support = true,
         })
 
-        vim.lsp.config("sqls", {})
+        vim.lsp.config("pyright", {
+            filetypes = { "python" },
+            single_file_support = true,
+        })
 
+        vim.lsp.config("jdtls", {})
+        vim.lsp.config("ts_ls", {})
+        vim.lsp.config("sqls", {})
         vim.lsp.config("gopls", {})
+        vim.lsp.config("deno", {})
     end,
 }
