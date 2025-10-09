@@ -24,6 +24,7 @@ return {
             end,
             sources = {
                 null_ls.builtins.formatting.black,
+                null_ls.builtins.formatting.sqruff,
                 null_ls.builtins.formatting.clang_format,
                 null_ls.builtins.formatting.google_java_format,
                 null_ls.builtins.formatting.cmake_format,
