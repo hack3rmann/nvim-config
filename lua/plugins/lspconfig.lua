@@ -143,5 +143,6 @@ return {
         vim.lsp.config("sqls", {})
         vim.lsp.config("gopls", {})
         vim.lsp.config("deno", {})
+        vim.lsp.config("asm-lsp", {})
     end,
 }

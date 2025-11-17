@@ -22,6 +22,9 @@ vim.filetype.add({
         [".*/hypr/.*%.conf"] = "hyprlang",
         [".*.slang"] = "slang",
     },
+    extension = {
+        asm = "nasm",
+    },
 })
 
 vim.diagnostic.config({ float = { border = "rounded" } })
