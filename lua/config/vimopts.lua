@@ -24,6 +24,8 @@ vim.filetype.add({
     },
     extension = {
         asm = "nasm",
+        inc = "nasm",
+        s = "nasm",
     },
 })
 
