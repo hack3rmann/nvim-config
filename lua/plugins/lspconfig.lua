@@ -144,5 +144,6 @@ return {
         vim.lsp.config("gopls", {})
         vim.lsp.config("deno", {})
         vim.lsp.config("asm-lsp", {})
+        vim.lsp.config("kotlin-language-server", {})
     end,
 }
