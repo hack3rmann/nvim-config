@@ -146,5 +146,6 @@ return {
         vim.lsp.config("asm-lsp", {})
         vim.lsp.config("kotlin-language-server", {})
         vim.lsp.config("hls", {})
+        vim.lsp.config("slint-lsp", {})
     end,
 }
