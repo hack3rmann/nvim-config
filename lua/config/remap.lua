@@ -13,3 +13,6 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
 -- Copy to regular clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to the clipboard", silent = true })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from the clipboard", silent = true })
+
+-- Unmap fucking Ctrl+u
+vim.keymap.set("i", "<C-u>", "<Nop>")
