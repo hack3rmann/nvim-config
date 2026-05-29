@@ -147,5 +147,6 @@ return {
         vim.lsp.config("kotlin-language-server", {})
         vim.lsp.config("hls", {})
         vim.lsp.config("slint-lsp", {})
+        vim.lsp.config("perlnavigator", {})
     end,
 }
