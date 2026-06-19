@@ -3,8 +3,16 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "BufRead",
     opts = {
+        keywords = {
+            TODO = { alt = { "todo" } },
+        },
         highlight = {
-            pattern = [[.*(<(KEYWORDS)[^:]*):]],
+            comments_only = false,
+            keyword = "bg",
+            pattern = {
+                [[.*(<(KEYWORDS)[^:]*):]],
+                [[\c.*(\c<(KEYWORDS)!\(.*\))]],
+            },
         },
     },
     config = function(_, opts)
