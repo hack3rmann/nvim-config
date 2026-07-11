@@ -148,5 +148,6 @@ return {
         vim.lsp.config("hls", {})
         vim.lsp.config("slint-lsp", {})
         vim.lsp.config("perlnavigator", {})
+        vim.lsp.config("dhall-lsp-server", {})
     end,
 }
