@@ -1,9 +1,11 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
         build = ":TSUpdate",
-        opts = {
-            ensure_installed = {
+        config = function()
+            local ensure_installed = {
                 "c",
                 "cpp",
                 "rust",
@@ -14,61 +16,69 @@ return {
                 "query",
                 "markdown",
                 "markdown_inline",
-            },
-            highlight = { enable = true },
-            indent = {
-                enable = true,
-                disable = { "nix" },
-            },
-            textobjects = {
-                select = {
-                    enable = true,
+            }
 
-                    -- Automatically jump forward to textobj, similar to targets.vim
-                    lookahead = true,
+            require("nvim-treesitter").install(ensure_installed)
 
-                    keymaps = {
-                        -- You can use the capture groups defined in textobjects.scm
-                        ["af"] = { query = "@function.outer", desc = "function" },
-                        ["if"] = { query = "@function.inner", desc = "function" },
-                        ["ac"] = { query = "@class.outer", desc = "class" },
-                        -- You can optionally set descriptions to the mappings (used in the desc parameter of
-                        -- nvim_buf_set_keymap) which plugins like which-key display
-                        ["ic"] = { query = "@class.inner", desc = "class" },
-                        -- You can also use captures from other query groups like `locals.scm`
-                        ["as"] = { query = "@scope", query_group = "locals", desc = "scope" },
-                    },
-                    -- You can choose the select mode (default is charwise "v")
-                    --
-                    -- Can also be a function which gets passed a table with the keys
-                    -- * query_string: eg "@function.inner"
-                    -- * method: eg "v" or "o"
-                    -- and should return the mode ("v", "V", or "<c-v>") or a table
-                    -- mapping query_strings to modes.
-                    selection_modes = {
-                        ["@parameter.outer"] = "v", -- charwise
-                        ["@function.outer"] = "V",  -- linewise
-                        ["@class.outer"] = "<c-v>", -- blockwise
-                    },
-                    -- If you set this to `true` (default is `false`) then any textobject is
-                    -- extended to include preceding or succeeding whitespace. Succeeding
-                    -- whitespace has priority in order to act similarly to eg the built-in
-                    -- `ap`.
-                    --
-                    -- Can also be a function which gets passed a table with the keys
-                    -- * query_string: eg "@function.inner"
-                    -- * selection_mode: eg "v"
-                    -- and should return true or false
-                    include_surrounding_whitespace = true,
-                },
-            },
-        },
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true }),
+                callback = function(ev)
+                    local lang = vim.treesitter.language.get_lang(ev.match)
+                    if not lang then
+                        return
+                    end
+
+                    -- On Neovim 0.12, get_parser returns nil instead of raising when missing.
+                    local ok, parser = pcall(vim.treesitter.get_parser, ev.buf, lang)
+                    if not ok or not parser then
+                        return
+                    end
+
+                    pcall(vim.treesitter.start, ev.buf)
+
+                    -- Keep previous behavior: treesitter indent everywhere except nix.
+                    if ev.match ~= "nix" then
+                        vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    end
+                end,
+            })
         end,
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        dependencies = { "nvim-treesitter", "nvim-treesitter/nvim-treesitter" },
+        branch = "main",
+        lazy = false,
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function()
+            require("nvim-treesitter-textobjects").setup({
+                select = {
+                    lookahead = true,
+                    selection_modes = {
+                        ["@parameter.outer"] = "v",
+                        ["@function.outer"] = "V",
+                        ["@class.outer"] = "<c-v>",
+                    },
+                    include_surrounding_whitespace = true,
+                },
+            })
+
+            local select = require("nvim-treesitter-textobjects.select")
+            local objects = {
+                ["af"] = { query = "@function.outer", desc = "function" },
+                ["if"] = { query = "@function.inner", desc = "function" },
+                ["ac"] = { query = "@class.outer", desc = "class" },
+                ["ic"] = { query = "@class.inner", desc = "class" },
+            }
+
+            for keys, map in pairs(objects) do
+                vim.keymap.set({ "x", "o" }, keys, function()
+                    select.select_textobject(map.query, "textobjects")
+                end, { desc = map.desc })
+            end
+
+            vim.keymap.set({ "x", "o" }, "as", function()
+                select.select_textobject("@local.scope", "locals")
+            end, { desc = "scope" })
+        end,
     },
 }
