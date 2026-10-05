@@ -48,6 +48,9 @@ return {
         },
 
         completion = {
+            -- Prefer LSP `replace` ranges over `insert`. rust-analyzer can return
+            -- inverted/out-of-bounds insert ranges that crash ghost_text extmarks.
+            keyword = { range = "full" },
             ghost_text = { enabled = true },
             menu = { border = "rounded" },
             documentation = { window = { border = "rounded" } },
