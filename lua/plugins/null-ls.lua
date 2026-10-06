@@ -10,7 +10,7 @@ return {
                 new_client.offset_encoding = "utf-8"
             end,
             on_attach = function(client, bufnr)
-                if client.supports_method("textDocument/formatting") then
+                if client:supports_method("textDocument/formatting") then
                     vim.api.nvim_clear_autocmds({ buffer = bufnr })
                     vim.api.nvim_create_autocmd("BufWritePre", {
                         buffer = bufnr,

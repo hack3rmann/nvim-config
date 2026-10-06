@@ -17,6 +17,13 @@ return {
                     reveal_force_cwd = true,
                     toggle = true,
                 })
+                -- Re-query git markers on open; toggle alone can reuse a stale status cache.
+                vim.schedule(function()
+                    local ok, events = pcall(require, "neo-tree.events")
+                    if ok then
+                        events.fire_event(events.GIT_EVENT)
+                    end
+                end)
             end,
             desc = "Reveal File Explorer",
         },
@@ -42,7 +49,8 @@ return {
         enable_opened_markers = true, -- Enable tracking of opened files. Required for `components.name.highlight_opened_files`
         enable_refresh_on_write = true, -- Refresh the tree when a file is written. Only used if `use_libuv_file_watcher` is false.
         enable_cursor_hijack = false, -- If enabled neotree will keep the cursor on the first letter of the filename when moving in the tree.
-        git_status_async = false,
+        -- Must be true so FS watchers also re-fetch git status (not only redraw the tree).
+        git_status_async = true,
         -- These options are for people with VERY large git repos
         git_status_async_options = {
             batch_size = 1000, -- how many lines of git status results to process at a time
@@ -116,6 +124,15 @@ return {
                 event = "neo_tree_buffer_enter",
                 handler = function()
                     vim.opt_local.relativenumber = true
+                end,
+            },
+            {
+                event = "neo_tree_window_after_open",
+                handler = function()
+                    local ok, events = pcall(require, "neo-tree.events")
+                    if ok then
+                        events.fire_event(events.GIT_EVENT)
+                    end
                 end,
             },
         },
@@ -647,5 +664,16 @@ return {
     },
     config = function(_, opts)
         require("neo-tree").setup(opts)
+
+        -- External git / terminal changes don't always hit neo-tree's .git watcher.
+        vim.api.nvim_create_autocmd({ "FocusGained", "TermClose" }, {
+            group = vim.api.nvim_create_augroup("NeoTreeGitRefresh", { clear = true }),
+            callback = function()
+                local ok, events = pcall(require, "neo-tree.events")
+                if ok then
+                    events.fire_event(events.GIT_EVENT)
+                end
+            end,
+        })
     end,
 }
